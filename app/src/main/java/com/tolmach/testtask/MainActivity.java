@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void onCharacterClick(int position){
         Intent intent = new Intent(MainActivity.this, CharacterInfoActivity.class);
-        intent.putExtra("name", requestedCharacters.get(position).getName());
+        intent.putExtra("id", requestedCharacters.get(position).getId());
         startActivity(intent);
     }
 

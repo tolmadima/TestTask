@@ -7,6 +7,15 @@ public class Character implements Parcelable {
 
     private String name;
     private String image;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
 
     public String getName() {
@@ -25,12 +34,14 @@ public class Character implements Parcelable {
         image = characterImageUrl;
     }
 
-    public Character(String name, String image){
+    public Character(String id, String name, String image){
+        this.id = id;
         this.name = name;
         this.image = image;
     }
 
     protected Character(Parcel in){
+        id = in.readString();
         name = in.readString();
         image = in.readString();
     }
@@ -54,6 +65,7 @@ public class Character implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(name);
         dest.writeString(image);
     }
