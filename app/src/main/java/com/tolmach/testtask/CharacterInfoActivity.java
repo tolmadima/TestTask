@@ -15,7 +15,6 @@ import com.squareup.picasso.Picasso;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class CharacterInfoActivity extends AppCompatActivity {
@@ -36,14 +35,14 @@ public class CharacterInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.character_info_activity);
-//        tvName = findViewById(R.layout.);
-//        tvStatus = findViewById(R.layout.);
-//        tvSpecies = findViewById(R.layout.);
-//        tvType = findViewById(R.layout.);
-//        tvGender = findViewById(R.layout.);
-//        tvEpisode = findViewById(R.layout.);
-//        tvCreated = findViewById(R.layout.);
-        ivImage = findViewById(R.id.char_info_iv);
+        tvName = findViewById(R.id.tv_info_name);
+        tvStatus = findViewById(R.id.tv_info_status);
+        tvSpecies = findViewById(R.id.tv_info_species);
+        tvType = findViewById(R.id.tv_info_type);
+        tvGender = findViewById(R.id.tv_info_gender);
+        tvEpisode = findViewById(R.id.tv_info_episode);
+        tvCreated = findViewById(R.id.tv_info_created);
+        ivImage = findViewById(R.id.iv_info_image);
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         RickAndMortyClient client = ServiceGenerator.getInstance().getRickAndMortyClient();
@@ -56,11 +55,8 @@ public class CharacterInfoActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onSuccess(CharacterInfo value) {
-                        String characterImage = value.getImage();
-                        Picasso.get().load(characterImage).into(ivImage);
-                        ivImage.setVisibility(characterImage != null ? View.VISIBLE : View.GONE);
-                        showInfo(value);
+                    public void onSuccess(CharacterInfo info) {
+                        showInfo(info);
                     }
 
                     @Override
@@ -71,24 +67,24 @@ public class CharacterInfoActivity extends AppCompatActivity {
                 });
     }
 
-    public void showInfo(CharacterInfo value){
-        String characterName = value.getName();
-        String characterGender = value.getGender();
-        String characterImage = value.getImage();
-        String characterType = value.getType();
-        String characterSpecies = value.getSpecies();
-        String characterStatus = value.getStatus();
-        String characterCreated = value.getCreated();
-        String characterEpisode = value.getEpisode();
+    public void showInfo(CharacterInfo info){
+        String characterName = info.getName();
+        String characterGender = info.getGender();
+        String characterImage = info.getImage();
+        String characterType = info.getType();
+        String characterSpecies = info.getSpecies();
+        String characterStatus = info.getStatus();
+        String characterCreated = info.getCreated();
+        String characterEpisode = info.getEpisode();
         System.out.println("test");
         System.out.println(characterCreated);
-//        tvName.setText(characterName);
-//        tvCreated.setText(characterCreated);
-//        tvEpisode.setText(characterEpisode);
-//        tvGender.setText(characterGender);
-//        tvStatus.setText(characterStatus);
-//        tvSpecies.setText(characterSpecies);
-//        tvType.setText(characterType);
+        tvName.setText(characterName);
+        tvCreated.setText(characterCreated);
+        tvEpisode.setText(characterEpisode);
+        tvGender.setText(characterGender);
+        tvStatus.setText(characterStatus);
+        tvSpecies.setText(characterSpecies);
+        tvType.setText(characterType);
         Picasso.get().load(characterImage).into(ivImage);
         ivImage.setVisibility(characterImage != null ? View.VISIBLE : View.GONE);
     }
