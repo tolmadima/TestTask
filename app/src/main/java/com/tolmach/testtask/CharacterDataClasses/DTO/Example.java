@@ -1,11 +1,11 @@
 package com.tolmach.testtask.CharacterDataClasses.DTO;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+public class Example {
 
-public class CharacterDataDto {
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -91,7 +91,9 @@ public class CharacterDataDto {
         this.gender = gender;
     }
 
-    public Origin getOrigin() { return origin; }
+    public Origin getOrigin() {
+        return origin;
+    }
 
     public void setOrigin(Origin origin) {
         this.origin = origin;

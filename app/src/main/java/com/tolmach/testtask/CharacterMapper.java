@@ -1,23 +1,23 @@
 package com.tolmach.testtask;
 
-import com.tolmach.testtask.CharacterDataClasses.DTO.CharacterDataDto;
-import com.tolmach.testtask.CharacterDataClasses.DTO.CharacterInfoDTO;
+import com.tolmach.testtask.CharacterDataClasses.DTO.Example;
 import com.tolmach.testtask.CharacterDataClasses.DTO.Location;
-import com.tolmach.testtask.CharacterDataClasses.DTO.Origin;
+
+import java.util.List;
 
 public class CharacterMapper {
 
-    public CharacterInfo map(CharacterInfoDTO characterInfoDTO){
+    public CharacterInfo map(Example example){
         CharacterInfo choosenCharacter = new CharacterInfo();
-        CharacterDataDto character = characterInfoDTO.getCharacter();
-        choosenCharacter.setName(character.getName());
-        Location characterLocation = character.getLocation();
-        choosenCharacter.setLocation(characterLocation.getName());
-        choosenCharacter.setCreated(character.getCreated());
-        choosenCharacter.setGender(character.getGender());
-        choosenCharacter.setEpisode(String.valueOf(character.getEpisode()));
-        choosenCharacter.setStatus(character.getStatus());
-        choosenCharacter.setImage(character.getImage());
+        choosenCharacter.setName(example.getName());
+        Location location = example.getLocation();
+        choosenCharacter.setLocation(location.getName());
+        choosenCharacter.setCreated(example.getCreated());
+        choosenCharacter.setGender(example.getGender());
+        List<String> episodes = example.getEpisode();
+        choosenCharacter.setEpisode(episodes.get(1));
+        choosenCharacter.setStatus(example.getStatus());
+        choosenCharacter.setImage(example.getImage());
         return choosenCharacter;
     }
 }

@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Origin {
+
     @SerializedName("name")
     @Expose
     private String name;
@@ -26,4 +27,5 @@ public class Origin {
     public void setUrl(String url) {
         this.url = url;
     }
+
 }

@@ -11,15 +11,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
-import com.tolmach.testtask.CharacterDataClasses.DTO.Location;
-import com.tolmach.testtask.CharacterDataClasses.DTO.Origin;
 
-import org.w3c.dom.CharacterData;
-
-import io.reactivex.Scheduler;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class CharacterInfoActivity extends AppCompatActivity {
@@ -61,11 +57,15 @@ public class CharacterInfoActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(CharacterInfo value) {
+                        String characterImage = value.getImage();
+                        Picasso.get().load(characterImage).into(ivImage);
+                        ivImage.setVisibility(characterImage != null ? View.VISIBLE : View.GONE);
                         showInfo(value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        e.getStackTrace();
                         Toast.makeText(CharacterInfoActivity.this, "Request Error", Toast.LENGTH_LONG).show();
                     }
                 });
